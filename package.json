@@ -14,5 +14,8 @@
     "ejs": "2.6.2",
     "express": "4.17.1",
     "pg": "7.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.19.1"
   }
 }

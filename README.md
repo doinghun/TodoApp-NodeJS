@@ -10,9 +10,15 @@ npm install
 npm start
 ```
 
+* with database settings
+
+```bash
+DB_DATABASE=postgres DB_USER=marco DB_PASSWORD=postgres npm start
+```
+
 ## Setting up the database
 
-This todo list uses PostgreSQL as its primary DBMS. To start the project, set up the database as follows: 
+This todo list uses PostgreSQL as its primary DBMS. To start the project, set up the database as follows:
 
 ### Recommended schema
 
