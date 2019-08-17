@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "start": "nodemon src/index.js"
   },
   "name": "todo",
   "version": "1.0.0",
