@@ -7,7 +7,7 @@ npm install
 ## How to develop
 
 ```bash
-npm dev
+npm start
 ```
 
 ## Database Structure
@@ -22,12 +22,12 @@ npm dev
 
 ```sql
 CREATE DATABASE todo;
-CREATE TABLE IF NOT EXISTS `todos` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `is_done` BOOLEAN NOT NULL DEFAULT 0,
-  `created_at` TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  `modified_at` TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS "tasks" (
+  "id" SERIAL PRIMARY KEY,
+  "title" varchar(255) NOT NULL,
+  "is_done" BOOLEAN NOT NULL DEFAULT FALSE,
+  "created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  "modified_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 )
+
 ```
