@@ -1,15 +1,18 @@
 const express = require('express')
 const query = require('./lib/pg')
+const path = require('path')
 
 const app = express()
 app.set('view engine', 'ejs')
+app.set('views',path.join(__dirname, 'views'));
+
 app.get('/', (_req, res) => {
-  res.send('hello')
+  res.render('index');
 })
 
 app.get('/tasks', async (_req, res) => {
-  const { rows } = await query('SELECT title FROM tasks')
-  res.send(rows)
+  const { rows } = await query('SELECT id, title FROM tasks')
+  res.render('index', { rows } );
 })
 
 const port = 3000

@@ -14,7 +14,7 @@ const query = async q => {
     port,
     password
   })
-  const client = await pool.connect()
+  const client = await pool.connect(console.log("Connected to database"))
   try {
     return await client.query(q)
   } finally {
