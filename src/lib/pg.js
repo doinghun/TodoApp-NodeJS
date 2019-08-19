@@ -2,9 +2,9 @@ const { Pool } = require('pg')
 
 const host = process.env.DB_HOST || 'localhost'
 const database = process.env.DB_DATABASE || 'postgres'
-const user = process.env.DB_USER || 'marcoo'
+const user = process.env.DB_USER || 'postgres'
 const port = process.env.DB_PORT || 5432
-const password = process.env.DB_PASSWORD || 'postgres'
+const password = process.env.DB_PASSWORD || 'dohun1208'
 
 const query = async q => {
   const pool = new Pool({
