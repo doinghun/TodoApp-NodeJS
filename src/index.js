@@ -3,6 +3,8 @@ const query = require('./lib/pg')
 const path = require('path')
 const parser = require('body-parser');
 const app = express();
+const Add = require('./models/addtask');
+
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname, 'views'));
 
@@ -18,11 +20,13 @@ app.get('/tasks', async (_req, res) => {
   res.render('index', { rows } );
 })
 
-app.post('/tasks/add', (req,res) => {
-  var task = {
-    task : req.body.task
-    }
-  res.json(task);
+app.post('/tasks/add', async (req,res) => {
+  const task = req.body.task
+  query(`INSERT INTO tasks (title) VALUES ('${task}')`)
+   .then(() => {
+     res.redirect('/tasks')
+   })
+   .catch(err => console.log(err))
 })
 
 const port = 3000
