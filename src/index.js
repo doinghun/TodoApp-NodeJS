@@ -19,7 +19,7 @@ app.get('/tasks', async (_req, res) => {
   res.render('index', { rows } );
 })
 
-app.post('/tasks/add', async (req,res) => {
+app.post('/tasks/add', (req,res) => {
   const task = req.body.task
   query(`INSERT INTO tasks (title) VALUES ('${task}')`)
    .then(() => {
