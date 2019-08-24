@@ -28,12 +28,6 @@
             </tr>
             <% rows.forEach((tasks) => { %>
                 <tr>
-                    <td>
-                        <form action="/tasks/delete" method="POST">
-                            <input type="hidden" name="id" value="<%= tasks.id %>" />
-                            <input type="submit" class="close" aria-label="Close" value="x" />
-                        </form>
-                    </td>
                     <td><%= tasks.title %></td>
                     <td>
                         <form action="/tasks/delete" method="POST">
