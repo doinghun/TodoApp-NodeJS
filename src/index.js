@@ -10,6 +10,8 @@ app.set('views',path.join(__dirname, 'views'));
 app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
 
+app.use('/scripts', express.static(path.join(__dirname,'../node_modules/bootstrap/dist/')));
+
 app.get('/', (_req, res) => {
   res.render('index');
 })
