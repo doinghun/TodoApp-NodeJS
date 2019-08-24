@@ -3,7 +3,6 @@ const query = require('./lib/pg')
 const path = require('path')
 const parser = require('body-parser');
 const app = express();
-const Add = require('./models/addtask');
 
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname, 'views'));
