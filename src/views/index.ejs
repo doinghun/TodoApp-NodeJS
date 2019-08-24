@@ -23,14 +23,20 @@
     <div>
         <table class="table table-hover">
             <tr>
-                <th>
-                    Tasks
-                </th>
+                <th> </th>
+                <th>Tasks</th>
             </tr>
             <% rows.forEach((tasks) => { %>
                 <tr>
+                    <td>
+                        <form action="/tasks/delete" method="POST">
+                            <input type="hidden" name="id" value="<%= tasks.id %>" />
+                            <input type="submit" class="close" aria-label="Close" value="x" />
+                        </form>
+                    </td>
                     <td><%= tasks.title %></td>
                 </tr>
+
             <% }) %>
 
         </table>
