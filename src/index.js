@@ -37,6 +37,15 @@ app.post('/tasks/delete',(req,res) => {
   .catch(err => console.log(err))
 })
 
+app.post('/tasks/update', (req,res) => {
+  const id = req.body.id;
+  query(`UPDATE tasks SET is_done = true WHERE id = ${id} AND is_done = false`)
+  .then(() => {
+    res.redirect('/tasks')
+  })
+  .catch(err => console.log(err))
+})
+
 const port = 3000
 app.listen(port, () => {
   console.log(`server started... localhost:${port}`)
