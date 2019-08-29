@@ -23,12 +23,21 @@
     <div>
         <table class="table table-hover">
             <tr>
-                <th>Tasks</th>
-                <th></th>
+                <th class="col-md-1"></th>
+                <th class="col-md-9">Tasks</th>
+                <th class="col-md-2"></th>
             </tr>
             <% rows.forEach((tasks) => { %>
                 <tr>
-                    <td><%= tasks.title %></td>
+                    <td>
+                        <form action="/tasks/done" method="POST">
+                            <input type="hidden" name="is_done" value="false" />
+                            <input type="submit" class="close" value="✓" />
+                        </form>
+                    </td>
+                    <td>
+                        <%= tasks.title %>
+                    </td>
                     <td>
                         <form action="/tasks/delete" method="POST">
                             <input type="hidden" name="id" value="<%= tasks.id %>" />
