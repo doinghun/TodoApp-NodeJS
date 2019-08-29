@@ -28,10 +28,11 @@
                 <th class="col-md-2"></th>
             </tr>
             <% rows.forEach((tasks) => { %>
+                <% //if(Boolean(tasks.is_done) === false){ %>
                 <tr>
                     <td>
-                        <form action="/tasks/done" method="POST">
-                            <input type="hidden" name="is_done" value="false" />
+                        <form action="/tasks/update" method="POST">
+                            <input type="hidden" name="id" value="<%= tasks.id %>" />
                             <input type="submit" class="close" value="✓" />
                         </form>
                     </td>
@@ -45,7 +46,7 @@
                         </form>
                     </td>
                 </tr>
-
+                <% console.log(typeof(tasks.isdone)) %>
             <% }) %>
 
         </table>
