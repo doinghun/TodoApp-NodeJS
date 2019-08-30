@@ -28,7 +28,7 @@
                 <th class="col-md-2"></th>
             </tr>
             <% rows.forEach((tasks) => { %>
-                <% //if(Boolean(tasks.is_done) === false){ %>
+                <% if(tasks.isdone === false){ %>
                 <tr>
                     <td>
                         <form action="/tasks/update" method="POST">
@@ -46,7 +46,7 @@
                         </form>
                     </td>
                 </tr>
-                <% console.log(typeof(tasks.isdone)) %>
+                <% } %>
             <% }) %>
 
         </table>
