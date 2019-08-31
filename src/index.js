@@ -30,6 +30,15 @@ app.post('/tasks/add', (req, res) => {
     .catch(err => console.log(err))
 })
 
+app.post('/tasks/delete',(req,res) => {
+  const id = req.body.id;
+  query(`DELETE FROM tasks WHERE id = ${id}`)
+  .then(() => {
+    res.redirect('/tasks')
+  })
+  .catch(err => console.log(err))
+})
+
 const port = 3000
 app.listen(port, () => {
   console.log(`server started... localhost:${port}`)
