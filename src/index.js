@@ -17,7 +17,7 @@ app.get('/', (_req, res) => {
 })
 
 app.get('/tasks', async (req, res) => {
-  const { rows } = await query('SELECT id, title FROM tasks')
+  const { rows } = await query('SELECT id, title, is_done FROM tasks')
   const error = req.query.error || ""
   res.render('index', { rows, error } )
 })
@@ -37,6 +37,15 @@ app.post('/tasks/add', (req, res) => {
 app.post('/tasks/delete',(req,res) => {
   const id = req.body.id;
   query(`DELETE FROM tasks WHERE id = ${id}`)
+  .then(() => {
+    res.redirect('/tasks')
+  })
+  .catch(err => console.log(err))
+})
+
+app.post('/tasks/update', (req,res) => {
+  const id = req.body.id;
+  query(`UPDATE tasks SET is_done = true WHERE id = ${id} AND is_done = false`)
   .then(() => {
     res.redirect('/tasks')
   })
