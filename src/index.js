@@ -16,8 +16,8 @@ app.get('/', (_req, res) => {
   res.render('index')
 })
 
-app.get('/tasks', async (_req, res) => {
-  const { rows } = await query('SELECT id, title, isdone FROM tasks')
+app.get('/tasks', async (req, res) => {
+  const { rows } = await query('SELECT id, title, is_done FROM tasks')
   const error = req.query.error || ""
   res.render('index', { rows, error } )
 })
@@ -45,7 +45,7 @@ app.post('/tasks/delete',(req,res) => {
 
 app.post('/tasks/update', (req,res) => {
   const id = req.body.id;
-  query(`UPDATE tasks SET isdone = true WHERE id = ${id} AND isdone = false`)
+  query(`UPDATE tasks SET is_done = true WHERE id = ${id} AND is_done = false`)
   .then(() => {
     res.redirect('/tasks')
   })
