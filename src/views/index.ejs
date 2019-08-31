@@ -24,29 +24,29 @@
     <div>
         <table class="table table-hover">
             <tr>
-                <th class="col-md-1"></th>
-                <th class="col-md-9">Tasks</th>
-                <th class="col-md-2"></th>
+                <th style="width:10%"></th>
+                <th style="width:80%">Tasks</th>
+                <th style="width:10%"></th>
             </tr>
             <% rows.forEach((tasks) => { %>
                 <% if(tasks.is_done === false){ %>
-                <tr>
-                    <td>
-                        <form action="/tasks/update" method="POST">
-                            <input type="hidden" name="id" value="<%= tasks.id %>" />
-                            <input type="submit" class="close" value="✓" />
-                        </form>
-                    </td>
-                    <td>
-                        <%= tasks.title %>
-                    </td>
-                    <td>
-                        <form action="/tasks/delete" method="POST">
-                            <input type="hidden" name="id" value="<%= tasks.id %>" />
-                            <input type="submit" class="close" aria-label="Close" value="x" />
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <form action="/tasks/update" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="submit" class="close" value="✓" />
+                    </form>
+                </td>
+                <td>
+                    <%= tasks.title %>
+                </td>
+                <td>
+                    <form action="/tasks/delete" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="submit" class="close" aria-label="Close" value="x" />
+                    </form>
+                </td>
+            </tr>
                 <% } %>
             <% }) %>
 
