@@ -16,19 +16,23 @@ app.get('/', (_req, res) => {
   res.render('index')
 })
 
-app.get('/tasks', async (_req, res) => {
+app.get('/tasks', async (req, res) => {
   const { rows } = await query('SELECT id, title FROM tasks')
-  res.render('index', { rows })
+  const error = req.query.error || ""
+  res.render('index', { rows, error } )
 })
 
 app.post('/tasks/add', (req, res) => {
   const task = req.body.task
-  query(`INSERT INTO tasks (title) VALUES ('${task}')`)
+  if (task === "") {
+    res.redirect('/tasks?error=Please+type+your+value')
+  } else {
+    query(`INSERT INTO tasks (title) VALUES ('${task}')`)
     .then(() => {
       res.redirect('/tasks')
     })
     .catch(err => console.log(err))
-})
+}})
 
 app.post('/tasks/delete',(req,res) => {
   const id = req.body.id;
