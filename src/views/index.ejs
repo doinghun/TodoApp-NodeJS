@@ -29,7 +29,7 @@
                 <th class="col-md-2"></th>
             </tr>
             <% rows.forEach((tasks) => { %>
-                <% if(tasks.isdone === false){ %>
+                <% if(tasks.is_done === false){ %>
                 <tr>
                     <td>
                         <form action="/tasks/update" method="POST">
