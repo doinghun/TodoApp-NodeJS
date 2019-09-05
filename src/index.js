@@ -54,6 +54,10 @@ app.post('/tasks/update', (req,res) => {
   .catch(err => console.log(err))
 })
 
+app.get('/login', (req, res) => {
+  res.render('auth')
+})
+
 const port = 3000
 app.listen(port, () => {
   console.log(`server started... localhost:${port}`)
