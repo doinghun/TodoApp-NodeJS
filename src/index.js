@@ -1,8 +1,12 @@
 const express = require('express')
-const query = require('./lib/pg')
+const session = require('express-session')
+const pgSession = require('connect-pg-simple')(session)
+const pg = require('./lib/pg')
+const query = pg.query
+const pgPool = pg.pgPool
 const path = require('path')
 const parser = require('body-parser')
-const session = require('express-session')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -10,9 +14,16 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(parser.urlencoded({ extended: false }))
 app.use(parser.json())
-app.use(
-  session({ secret: 'my secret', resave: false, saveUninitialized: false})
-)
+
+app.use(session({
+  store: new pgSession({
+    pool : pgPool,
+    tableName: 'sessions'
+  }),
+  secret: 'my secret',
+  resave: false,
+  saveUninitialized: false
+  }))
 
 app.use('/scripts', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/')))
 
