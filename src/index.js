@@ -79,6 +79,12 @@ app.post('/login', (req,res)=> {
   res.redirect('/tasks')
 })
 
+app.post('/logout', (req,res)=>{
+  req.session.destroy(err => {
+    console.log(err)
+    res.redirect('/tasks')
+  });
+})
 const port = 3000
 app.listen(port, () => {
   console.log(`server started... localhost:${port}`)
