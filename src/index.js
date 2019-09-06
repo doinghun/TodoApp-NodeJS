@@ -2,6 +2,7 @@ const express = require('express')
 const query = require('./lib/pg')
 const path = require('path')
 const parser = require('body-parser')
+const session = require('express-session')
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -9,6 +10,9 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(parser.urlencoded({ extended: false }))
 app.use(parser.json())
+app.use(
+  session({ secret: 'my secret', resave: false, saveUninitialized: false})
+)
 
 app.use('/scripts', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/')))
 
@@ -55,7 +59,13 @@ app.post('/tasks/update', (req,res) => {
 })
 
 app.get('/login', (req, res) => {
-  res.render('auth')
+  console.log(req.session.isLoggedIn)
+  res.render('auth', { isAuthenticated: req.session.isLoggedIn })
+})
+
+app.post('/login', (req,res)=> {
+  req.session.isLoggedIn = true;
+  res.redirect('/tasks')
 })
 
 const port = 3000
