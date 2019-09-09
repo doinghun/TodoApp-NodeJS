@@ -35,7 +35,7 @@ app.get('/tasks', async (req, res) => {
   const show_all = req.query.show_all || "true"
   const { rows } = await query('SELECT id, title, is_done FROM tasks ORDER BY id ')
   const error = req.query.error || ""
-  res.render('index', { rows, error, show_all } )
+  res.render('index', { rows, error, show_all, isAuthenticated: req.session.isLoggedIn} )
 })
 
 app.post('/tasks/add', (req, res) => {

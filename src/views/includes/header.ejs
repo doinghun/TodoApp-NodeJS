@@ -8,11 +8,13 @@
 		<ul class="nav justify-content-end">
 			<li class="nav-item"><a class="nav-link" href="/tasks">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+			<% if(isAuthenticated) {%>
 			<li class="nav-item">
-				<form class="nav-link" action="/logout" method="post">
-					<button  type="submit">Log Out</button>
+				<form action="/logout" method="post">
+					<button class="btn btn-link" type="submit">Log Out</button>
 				</form>
 			</li>
+			<% } %>
 		</ul>
 	  
 	</div>
