@@ -90,6 +90,9 @@ app.get('/signup', (req, res) => {
   res.render('signup', { isAuthenticated: req.session.isLoggedIn })
 })
 
+app.post('/signup', (req, res) => {
+})
+
 const port = 3000
 app.listen(port, () => {
   console.log(`server started... localhost:${port}`)
