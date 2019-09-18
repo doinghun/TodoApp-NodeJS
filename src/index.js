@@ -85,6 +85,11 @@ app.post('/logout', (req,res)=>{
     res.redirect('/tasks')
   });
 })
+
+app.get('/signup', (req, res) => {
+  res.render('signup', { isAuthenticated: req.session.isLoggedIn })
+})
+
 const port = 3000
 app.listen(port, () => {
   console.log(`server started... localhost:${port}`)
