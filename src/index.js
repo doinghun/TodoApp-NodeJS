@@ -71,7 +71,7 @@ app.post('/tasks/update', (req,res) => {
 
 app.get('/login', (req, res) => {
   console.log(req.session.isLoggedIn)
-  res.render('auth', { isAuthenticated: req.session.isLoggedIn })
+  res.render('login', { isAuthenticated: req.session.isLoggedIn })
 })
 
 app.post('/login', (req,res)=> {
