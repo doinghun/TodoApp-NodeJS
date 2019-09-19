@@ -58,3 +58,17 @@ To see the list of tasks you have inserted:
 ```sql
 SELECT * from tasks
 ```
+
+### Create User Table
+
+For user log-in & sign-up management
+
+```sql
+CREATE TABLE IF NOT EXISTS users (
+        id UUID PRIMARY KEY,
+        email VARCHAR(128) UNIQUE NOT NULL,
+        password VARCHAR(128) NOT NULL,
+        created_date TIMESTAMP,
+        modified_date TIMESTAMP
+      )
+```
