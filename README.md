@@ -67,8 +67,6 @@ For user log-in & sign-up management
 CREATE TABLE IF NOT EXISTS users (
         id UUID PRIMARY KEY,
         email VARCHAR(128) UNIQUE NOT NULL,
-        password VARCHAR(128) NOT NULL,
-        created_date TIMESTAMP,
-        modified_date TIMESTAMP
+        password VARCHAR(128) NOT NULL
       )
 ```

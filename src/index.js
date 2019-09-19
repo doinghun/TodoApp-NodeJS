@@ -6,6 +6,9 @@ const query = pg.query
 const pgPool = pg.pgPool
 const path = require('path')
 const parser = require('body-parser')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const uuidv4 = require('uuid/v4')
 
 const app = express()
 
@@ -91,6 +94,13 @@ app.get('/signup', (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+  query(`INSERT INTO users (id, email, password) VALUES ('${uuidv4()}','${email}','${password}')`)
+  .then(() => {
+    res.redirect('/login')
+  })
+  .catch(err => console.log(err))
 })
 
 const port = 3000
