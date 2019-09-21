@@ -42,15 +42,15 @@
                     </form>
                 </td>
                 <td>
-                <% if(task.is_done === false){ %>
-                    <%= task.title %>
+                <% if(tasks.is_done === false){ %>
+                    <%= tasks.title %>
                 <% } else { %>
-                    <strike><%= task.title %></strike>
+                    <strike><%= tasks.title %></strike>
                 <% } %>
                 </td>
                 <td>
                     <form action="/tasks/delete" method="POST">
-                        <input type="hidden" name="id" value="<%= task.id %>" />
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
                         <input type="submit" class="close" aria-label="Close" value="x" />
                     </form>
                 </td>
