@@ -26,33 +26,49 @@
             <tr>
                 <th style="width:10%"></th>
                 <th style="width:80%">Tasks</th>
-                <th style="width:10%"></th>
+                <th style="width:10%">
+                    <form action="/tasks" method="GET">
+                        <% if(show_all === "false") { %>
+                            <input type="hidden" name="show_all" value="true" >
+                            <input id="show_all" type="submit" class="btn btn-primary mb-2" value="Show All" />
+                        <% } else { %>
+                            <input type="hidden" name="show_all" value="false" >
+                            <input id="show_todos" type="submit" class="btn btn-primary mb-2" value="Show Todos" />
+                        <% } %>
+                    </form>
+                </th>
             </tr>
-            <% rows.forEach((tasks) => { %>
-                <% if(tasks.is_done === false){ %>
+            <% rows.forEach((task) => { %>
             <tr>
                 <td>
                     <form action="/tasks/update" method="POST">
-                        <input type="hidden" name="id" value="<%= tasks.id %>" />
-                        <input type="submit" class="close" value="✓" />
+                        <input type="hidden" name="id" value="<%= task.id %>" />
+                        <input type="hidden" name="is_done" value="<%= task.is_done %>" />
+                        <input type="hidden" name="show_all" value="<%= show_all %>" />
+                            <% if(task.is_done === false){ %>
+                                <input type="submit" class="close" value="    " />
+                            <% } else { %>
+                                <input type="submit" class="close" value="✓" />
+                            <% } %>
                     </form>
                 </td>
                 <td>
-                    <%= tasks.title %>
+                <% if(task.is_done === false){ %>
+                    <%= task.title %>
+                <% } else { %>
+                    <strike><%= task.title %></strike>
+                <% } %>
                 </td>
                 <td>
                     <form action="/tasks/delete" method="POST">
-                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="hidden" name="id" value="<%= task.id %>" />
                         <input type="submit" class="close" aria-label="Close" value="x" />
                     </form>
                 </td>
             </tr>
-                <% } %>
             <% }) %>
-
         </table>
     </div>
-    
 </main>
 </body>
 </html>

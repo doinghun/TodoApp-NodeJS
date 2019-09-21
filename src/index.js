@@ -17,9 +17,11 @@ app.get('/', (_req, res) => {
 })
 
 app.get('/tasks', async (req, res) => {
-  const { rows } = await query('SELECT id, title, is_done FROM tasks')
+  const show_all = req.query.show_all
+  const condition = !show_all || show_all === 'true' ? '' : ' WHERE is_done = false'
+  const { rows } = await query('SELECT id, title, is_done FROM tasks' + condition)
   const error = req.query.error || ""
-  res.render('index', { rows, error } )
+  res.render('index', { rows, error, show_all })
 })
 
 app.post('/tasks/add', (req, res) => {
@@ -44,10 +46,17 @@ app.post('/tasks/delete',(req,res) => {
 })
 
 app.post('/tasks/update', (req,res) => {
-  const id = req.body.id;
-  query(`UPDATE tasks SET is_done = true WHERE id = ${id} AND is_done = false`)
+  // 0) show_all 값 가져오기
+  const show_all = req.body.show_all
+  // 1) If문으로 URL에 tasks?show_all가 있는지 검사
+  // 2) 있으면 /tasks?show_all=false 혹은 /tasks?show_all=true 페이지로 넘기기
+  // 3) 없으면 /tasks로 넘기기
+  const q = show_all ? `?show_all=${show_all}` : ''
+  const id = req.body.id
+  const is_done = req.body.is_done === 'true' ? 'false' : 'true'
+  query(`UPDATE tasks SET is_done = ${is_done} WHERE id = ${id}`)
   .then(() => {
-    res.redirect('/tasks')
+    res.redirect('/tasks' + q)
   })
   .catch(err => console.log(err))
 })
