@@ -28,6 +28,18 @@ app.use(session({
   saveUninitialized: false
   }))
 
+passport.use('local', new  LocalStrategy({passReqToCallback : true}, (req, username, password, done) => {
+  loginAttempt();
+  async function loginAttempt(){
+    query(`SELECT id, email, password FROM users WHERE email = ${email}, `)
+    .then(() => {
+      res.redirect('/tasks')
+    })
+    .catch(err => console.log(err))
+  }
+  
+}))
+
 app.use('/scripts', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/')))
 
 app.get('/', (_req, res) => {
@@ -78,6 +90,7 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', (req,res)=> {
+
   req.session.isLoggedIn = true;
   res.redirect('/tasks')
 })
