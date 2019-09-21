@@ -42,11 +42,15 @@
                     </form>
                 </td>
                 <td>
-                    <%= tasks.title %>
+                <% if(task.is_done === false){ %>
+                    <%= task.title %>
+                <% } else { %>
+                    <strike><%= task.title %></strike>
+                <% } %>
                 </td>
                 <td>
                     <form action="/tasks/delete" method="POST">
-                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="hidden" name="id" value="<%= task.id %>" />
                         <input type="submit" class="close" aria-label="Close" value="x" />
                     </form>
                 </td>
@@ -72,10 +76,8 @@
             </tr>
                 <% } %>
             <% }) %>
-
         </table>
     </div>
-    
 </main>
 </body>
 </html>
