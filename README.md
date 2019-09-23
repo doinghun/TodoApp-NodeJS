@@ -39,6 +39,7 @@ CREATE TABLE tasks (
     is_done BOOLEAN NOT NULL DEFAULT false,
     created_at DATE NOT NULL DEFAULT CURRENT_DATE,
     modified_at DATE
+    user_id UUID REFERENCES users(id)
 )
 ```
 
