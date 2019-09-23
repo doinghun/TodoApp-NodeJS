@@ -40,18 +40,20 @@ app.get('/tasks', async (req, res) => {
     req.flash('danger', "Please Log In");
     return res.redirect('/login')
   }
+  const user_id = req.session.user.rows[0].id
   const show_all = req.query.show_all || "true"
-  const { rows } = await query('SELECT id, title, is_done FROM tasks ORDER BY id ')
+  const { rows } = await query(`SELECT id, title, is_done FROM tasks WHERE user_id = '${user_id}' ORDER BY id `)
   const error = req.query.error || ""
   res.render('index', { rows, error, show_all, isAuthenticated: req.session.isLoggedIn,  messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}} )
 })
 
 app.post('/tasks/add', (req, res) => {
   const task = req.body.task
+  const user_id = req.session.user.rows[0].id
   if (task === "") {
     res.redirect('/tasks?error=Please+type+your+value')
   } else {
-    query(`INSERT INTO tasks (title) VALUES ('${task}')`)
+    query(`INSERT INTO tasks (title, user_id) VALUES ('${task}', '${user_id}')`)
     .then(() => {
       res.redirect('/tasks')
     })
@@ -86,7 +88,7 @@ app.post('/login', async (req,res) => {
   const email = req.body.email
   const password = req.body.password
 
-  query(`SELECT email, password FROM users WHERE email = '${email}'`)
+  query(`SELECT id, email, password FROM users WHERE email = '${email}'`)
   .then(user => {
     if(user.rows.length == 0){
       req.flash('danger', "Oops. Incorrect login details.");
