@@ -103,6 +103,7 @@ app.post('/login', async (req,res) => {
           res.redirect('/tasks')
           })
         }
+      req.flash('danger', "Password is incorrect");
       res.redirect('/login')
       })
     .catch(err => {
@@ -121,7 +122,7 @@ app.post('/logout', (req,res)=>{
 })
 
 app.get('/signup', (req, res) => {
-  res.render('signup', { isAuthenticated: req.session.isLoggedIn })
+  res.render('signup', { isAuthenticated: req.session.isLoggedIn, messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')} })
 })
 
 app.post('/signup', (req, res) => {
