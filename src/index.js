@@ -36,6 +36,10 @@ app.get('/', (_req, res) => {
 })
 
 app.get('/tasks', async (req, res) => {
+  if(!req.session.isLoggedIn) {
+    req.flash('danger', "Please Log In");
+    return res.redirect('/login')
+  }
   const show_all = req.query.show_all || "true"
   const { rows } = await query('SELECT id, title, is_done FROM tasks ORDER BY id ')
   const error = req.query.error || ""
