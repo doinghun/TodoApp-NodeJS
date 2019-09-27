@@ -12,8 +12,9 @@ app.use(parser.json())
 
 app.use('/scripts', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/')))
 
-app.get('/', (_req, res) => {
-  res.render('index')
+app.get('/', (req, res) => {
+  const url = req.url
+  res.render('index', { url })
 })
 
 app.get('/tasks', async (req, res) => {
@@ -21,7 +22,8 @@ app.get('/tasks', async (req, res) => {
   const condition = !show_all || show_all === 'true' ? '' : ' WHERE is_done = false'
   const { rows } = await query('SELECT id, title, is_done FROM tasks' + condition)
   const error = req.query.error || ""
-  res.render('index', { rows, error, show_all })
+  const url = req.url
+  res.render('todos', { rows, error, show_all, url })
 })
 
 app.post('/tasks/add', (req, res) => {
