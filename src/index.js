@@ -50,7 +50,7 @@ app.get('/tasks', async (req, res) => {
 app.post('/tasks/add', (req, res) => {
   const task = req.body.task
   const user_id = req.session.user.rows[0].id
-  if (task === "") {
+  if (task.trim() === "") {
     res.redirect('/tasks?error=Please+type+your+value')
   } else {
     query(`INSERT INTO tasks (title, user_id) VALUES ('${task}', '${user_id}')`)
@@ -74,7 +74,7 @@ app.post('/tasks/update', (req,res) => {
   const is_done = req.body.is_done ? true : false;
   query(`UPDATE tasks SET is_done = ${is_done} WHERE id = ${id}`)
   .then(() => {
-    res.redirect('/tasks')
+    res.redirect('/tasks' + q)
   })
   .catch(err => console.log(err))
 })
