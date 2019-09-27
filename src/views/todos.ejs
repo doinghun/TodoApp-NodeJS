@@ -10,62 +10,70 @@
 </header>
 
 <main>
-    <div class="jumbotron">
-        <p>To Do List App</p>
-    </div>
-    <div class="form-group">
-        <form class="form-inline" action="/tasks/add" method="POST">
-            <label for="addTask">Add New Tasks</label>
-            <input type="text" class="form-control" name="task"></input>
-            <button type="submit" class="btn btn-primary mb-2">Submit</button>
-            <label><%= error %></label>
-        </form>
-    </div>
-    <div>
+    <div class="todo">
+        <div class="form-group">
+            <form class="form-inline justify-content-center" action="/tasks/add" method="POST">
+                <input type="text" class="form-control" name="task" placeholder="Add New Tasks"></input>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <label><%= error %></label>
+            </form>
+        </div>
         <table class="table table-hover">
             <tr>
                 <th style="width:10%"></th>
-                <th style="width:80%">Tasks</th>
-                <th style="width:10%">
-                    <form action="/tasks" method="GET">
-                        <% if(show_all === "false") { %>
-                            <input type="hidden" name="show_all" value="true" >
-                            <input id="show_all" type="submit" class="btn btn-primary mb-2" value="Show All" />
-                        <% } else { %>
-                            <input type="hidden" name="show_all" value="false" >
-                            <input id="show_todos" type="submit" class="btn btn-primary mb-2" value="Show Todos" />
-                        <% } %>
-                    </form>
+                <th style="width:70%">Tasks</th>
+                <th style="width:20%">
+                    <% if(show_all == "true") { %>
+                    <button style = "float: right" class="btn btn-primary mb-2" onclick="location.href='/tasks/?show_all=false'">Hide Done</button>
+                    <%} else if(show_all == "false"){ %>
+                    <button style = "float: right" class="btn btn-primary mb-2" onclick="location.href='/tasks/?show_all=true'">Show All</button>
+                    <%} %>
                 </th>
             </tr>
-            <% rows.forEach((task) => { %>
+
+            <% rows.forEach((tasks) => { %>
+                <% if(tasks.is_done === false) { %>
             <tr>
                 <td>
                     <form action="/tasks/update" method="POST">
-                        <input type="hidden" name="id" value="<%= task.id %>" />
-                        <input type="hidden" name="is_done" value="<%= task.is_done %>" />
-                        <input type="hidden" name="show_all" value="<%= show_all %>" />
-                            <% if(task.is_done === false){ %>
-                                <input type="submit" class="close" value="    " />
-                            <% } else { %>
-                                <input type="submit" class="close" value="✓" />
-                            <% } %>
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="checkbox" name="is_done" id="checkDone" onChange="this.form.submit()">
                     </form>
                 </td>
                 <td>
-                <% if(task.is_done === false){ %>
-                    <%= task.title %>
+                <% if(tasks.is_done === false){ %>
+                    <%= tasks.title %>
                 <% } else { %>
-                    <strike><%= task.title %></strike>
+                    <strike><%= tasks.title %></strike>
                 <% } %>
                 </td>
                 <td>
                     <form action="/tasks/delete" method="POST">
-                        <input type="hidden" name="id" value="<%= task.id %>" />
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
                         <input type="submit" class="close" aria-label="Close" value="x" />
                     </form>
                 </td>
             </tr>
+                <% } %>
+                <% if(tasks.is_done === true && show_all == "true"){ %>
+            <tr>
+                <td>
+                    <form action="/tasks/update" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="checkbox" id="checkDone" onChange="this.form.submit()"" checked/>
+                    </form>
+                </td>
+                <td>
+                    <del><%= tasks.title %></del>
+                </td>
+                <td>
+                    <form action="/tasks/delete" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="submit" class="close" aria-label="Close" value="x" />
+                    </form>
+                </td>
+            </tr>
+                <% } %>
             <% }) %>
         </table>
     </div>

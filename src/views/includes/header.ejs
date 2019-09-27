@@ -2,12 +2,21 @@
 	<div class="container-fluid">
 
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Todo List</a>
+			<a class="navbar-brand" href="/tasks"><h2>Todo List</h2></a>
 		</div>
 
-		<ul class="nav navbar-nav">
+		<ul class="nav justify-content-end">
 			<% if(url !== "/") { %>
-				<li><a href="/">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+			<% } %>
+			<% if(!isAuthenticated) { %>
+			<li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+			<% } else{%>
+			<li class="nav-item">
+				<form action="/logout" method="post">
+					<button class="btn btn-link" type="submit">Log Out</button>
+				</form>
+			</li>
 			<% } %>
 		</ul>
 
