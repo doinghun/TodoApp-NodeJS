@@ -39,6 +39,7 @@ CREATE TABLE tasks (
     is_done BOOLEAN NOT NULL DEFAULT false,
     created_at DATE NOT NULL DEFAULT CURRENT_DATE,
     modified_at DATE
+    user_id UUID REFERENCES users(id)
 )
 ```
 
@@ -57,4 +58,30 @@ To see the list of tasks you have inserted:
 
 ```sql
 SELECT * from tasks
+```
+
+### Create User Table
+
+For user log-in & sign-up management
+
+```sql
+CREATE TABLE IF NOT EXISTS users (
+        id UUID PRIMARY KEY,
+        email VARCHAR(128) UNIQUE NOT NULL,
+        password VARCHAR(128) NOT NULL
+      )
+```
+
+### Create Session table
+
+For setting up session & cookies
+
+```sql
+CREATE TABLE "sessions" (
+    "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+ALTER TABLE "sessions" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 ```
