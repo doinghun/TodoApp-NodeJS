@@ -32,8 +32,10 @@ app.use(session({
 app.use('/scripts', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/')))
 
 app.get('/', (req, res) => {
-  const url = req.url
-  res.render('index', { url, isAuthenticated: req.session.isLoggedIn })
+  res.render('index', {
+    isAuthenticated: req.session.isLoggedIn,
+    messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
+  })
 })
 
 app.get('/tasks', async (req, res) => {
@@ -45,9 +47,8 @@ app.get('/tasks', async (req, res) => {
   const show_all = req.query.show_all || "true"
   const { rows } = await query(`SELECT id, title, is_done FROM tasks WHERE user_id = '${user_id}' ORDER BY id `)
   const error = req.query.error || ""
-  const url = req.url
-  res.render('index', {
-    rows, error, show_all, isAuthenticated: req.session.isLoggedIn, url,
+  res.render('todos', {
+    rows, error, show_all, isAuthenticated: req.session.isLoggedIn,
     messages: {danger: req.flash('danger'), warning: req.flash('warning'), success: req.flash('success')}
   })
 })
