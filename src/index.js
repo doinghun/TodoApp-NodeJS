@@ -30,7 +30,7 @@ app.use(session({
   }))
 
 app.use('/scripts', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/')))
-app.use('/script', express.static(path.join(__dirname, '../node_modules/axios/dist/axios.min.js')))
+app.use('/scripts', express.static(path.join(__dirname, '../node_modules/axios/dist/axios.min.js')))
 
 app.get('/', (_req, res) => {
   res.render('index')
