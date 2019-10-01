@@ -29,13 +29,13 @@ app.use(session({
   saveUninitialized: false
   }))
 
-app.use('/scripts', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/')))
-app.use('/scripts', express.static(path.join(__dirname, '../node_modules/axios/dist/axios.min.js')))
+app.use('/scripts', express.static(path.join(__dirname, '../node_modules/')))
+app.use('/static', express.static(path.join(__dirname,'public')))
 
 app.get('/', (_req, res) => {
   res.render('index')
 })
-
+ 
 app.get('/tasks', async (req, res) => {
   if(!req.session.isLoggedIn) {
     req.flash('danger', "Please Log In");
@@ -138,6 +138,11 @@ app.post('/signup', (req, res) => {
       res.redirect('/login')
     })
   .catch(err => console.log(err))
+})
+
+app.get('/tasks/axios', (req,res) => {
+  const error = req.query.error || ""
+  res.render('index-axios', {error, isAuthenticated: req.session.isLoggedIn})
 })
 
 const port = 3000
