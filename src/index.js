@@ -9,6 +9,7 @@ const parser = require('body-parser')
 const uuidv4 = require('uuid/v4')
 const bcrypt = require('bcrypt')
 const flash = require('connect-flash')
+const db = require('./lib/queries')
 
 const app = express()
 
@@ -144,6 +145,11 @@ app.get('/tasks/axios', (req,res) => {
   const error = req.query.error || ""
   res.render('index-axios', {error, isAuthenticated: req.session.isLoggedIn})
 })
+
+app.get('/api/tasks', db.getTasks)
+app.get('/api/tasks/:id', db.getTaskById)
+app.post('/api/tasks', db.createTask)
+app.delete('/api/tasks/:id', db.deleteTask)
 
 const port = 3000
 app.listen(port, () => {
