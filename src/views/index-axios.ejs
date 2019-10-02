@@ -8,7 +8,7 @@
     
     <div class="form-group">
         <h2>Create Tasks</h2>
-        <form class="form-inline justify-content-center">
+        <form class="form-inline justify-content-center" id="submit-task">
             <input type="text" class="form-control" id="task" placeholder="Add New Tasks"></input>
             <button type="submit" class="btn btn-primary">Submit</button>
             <label><%= error %></label>
@@ -17,11 +17,20 @@
 
     <div>
         <h2>Tasks</h2>
-        <ul></ul>
     </div>
-    
+
     <script src="/scripts/axios/dist/axios.min.js"></script>
     <script src="/static/js/main.js"></script>
+    
+    <table class="table table-hover" id="task-table">
+        <tr>
+            <th style="width:10%"></th>
+            <th style="width:70%">Tasks</th>
+            <th style="width:20%"></th>
+        </tr>
+    </table>
+    
+   
 </body>
 </html>
 
