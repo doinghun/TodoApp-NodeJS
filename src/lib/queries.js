@@ -23,7 +23,7 @@ const query = async q => {
 }
 
 const getTasks = (req, res) => {
-    query(`SELECT id, title, is_done FROM tasks WHERE user_id = '51175123-33e3-4524-b4f9-bcfecb94e941'`)
+    query(`SELECT id, title, is_done FROM tasks WHERE user_id = '51175123-33e3-4524-b4f9-bcfecb94e941' ORDER BY id`)
     .then((results) => {
         res.status(200).json(results.rows)
     })
@@ -50,12 +50,24 @@ const createTask = (req, res) => {
     .catch(err => console.log(err))
 }
 
+const updateTask = (req,res) => {
+    const id = parseInt(req.params.id)
+    const is_done = req.body.is_done ? true : false
+
+    query(`UPDATE tasks SET is_done = ${is_done} WHERE id = ${id}`)
+    .then(() => {
+        res.status(200).send(`Task Updated with ID: ${id}`)
+     })
+    .catch(err => console.log(err))
+}
+
 const deleteTask = (req, res) => {
     const id = parseInt(req.params.id)
 
     query(`DELETE FROM tasks WHERE id = ${id}`)
     .then(() => {
-        res.status(200).send(`User deleted with ID: ${id}`)
+        res.status(200).send(`Task deleted with ID: ${id}`)
+        console.log("Task Deleted")
     })
     .catch(err => console.log(err))
 }
@@ -64,5 +76,6 @@ module.exports = {
     getTasks,
     getTaskById,
     createTask,
+    updateTask,
     deleteTask
 }
