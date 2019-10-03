@@ -51,12 +51,16 @@ const createTask = (req, res) => {
 }
 
 const updateTask = (req,res) => {
-    const id = parseInt(req.params.id)
-    const is_done = req.body.is_done ? true : false
+    const id = parseInt(req.params.id);
+    if(req.params.is_done == "false"){
+        var is_done = true;
+    } else {
+        var is_done = false;
+    }
 
     query(`UPDATE tasks SET is_done = ${is_done} WHERE id = ${id}`)
     .then(() => {
-        res.status(200).send(`Task Updated with ID: ${id}`)
+        res.status(200).send(`Task updated with ID: ${id}`)
      })
     .catch(err => console.log(err))
 }
