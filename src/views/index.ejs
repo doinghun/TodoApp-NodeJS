@@ -10,34 +10,67 @@
 </header>
 
 <main>
-    <div class="jumbotron">
-        <p>To Do List App</p>
-    </div>
-    <div class="form-group">
-        <form class="form-inline" action="/tasks/add" method="POST">
-            <label for="addTask">Add New Tasks</label>
-            <input type="text" class="form-control" name="task"></input>
-            <button type="submit" class="btn btn-primary mb-2">Submit</button>
-            <label><%= error %></label>
-        </form>
-    </div>
-    <div>
+    
+    <div class="todo">
+        <div class="form-group">
+            <form class="form-inline justify-content-center" action="/tasks/add" method="POST">
+                <input type="text" class="form-control" name="task" placeholder="Add New Tasks"></input>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <label><%= error %></label>
+            </form>
+        </div>
         <table class="table table-hover">
             <tr>
-                <th>Tasks</th>
-                <th></th>
+                <th style="width:10%"></th>
+                <th style="width:70%">Tasks</th>
+                <th style="width:20%">
+                    <% if(show_all == "true") { %>
+                    <button style = "float: right" class="btn btn-primary mb-2" onclick="location.href='/tasks/?show_all=false'">Hide Done</button>
+                    <%} else if(show_all == "false"){ %>
+                    <button style = "float: right" class="btn btn-primary mb-2" onclick="location.href='/tasks/?show_all=true'">Show All</button>
+                    <%} %>
+                </th>
             </tr>
-            <% rows.forEach((tasks) => { %>
-                <tr>
-                    <td><%= tasks.title %></td>
-                    <td>
-                        <form action="/tasks/delete" method="POST">
-                            <input type="hidden" name="id" value="<%= tasks.id %>" />
-                            <input type="submit" class="close" aria-label="Close" value="x" />
-                        </form>
-                    </td>
-                </tr>
 
+            <% rows.forEach((tasks) => { %>
+                <% if(tasks.is_done === false) { %>
+            <tr>
+                <td>
+                    <form action="/tasks/update" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="checkbox" name="is_done" id="checkDone" onChange="this.form.submit()">
+                    </form>
+                </td>
+                <td>
+                    <%= tasks.title %>
+                </td>
+                <td>
+                    <form action="/tasks/delete" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="submit" class="close" aria-label="Close" value="x" />
+                    </form>
+                </td>
+            </tr>
+                <% } %>
+                <% if(tasks.is_done === true && show_all == "true"){ %>
+            <tr>
+                <td>
+                    <form action="/tasks/update" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="checkbox" id="checkDone" onChange="this.form.submit()"" checked/>
+                    </form>
+                </td>
+                <td>
+                    <del><%= tasks.title %></del>
+                </td>
+                <td>
+                    <form action="/tasks/delete" method="POST">
+                        <input type="hidden" name="id" value="<%= tasks.id %>" />
+                        <input type="submit" class="close" aria-label="Close" value="x" />
+                    </form>
+                </td>
+            </tr>
+                <% } %>
             <% }) %>
 
         </table>
