@@ -1,0 +1,26 @@
+<% if(messages){ %>
+    <% if(messages.warning){ %>
+        <% if(messages.warning.length){ %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong><%= messages.warning %></strong>
+        </div>
+        <%} %>
+    <%} %>
+    <% if(messages.danger){ %>
+        <% if(messages.danger.length){ %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong><%= messages.danger %></strong>
+        </div>
+        <%} %>
+    <%} %>
+    <% if(messages.success){ %>
+        <% if(messages.success.length){ %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong><%= messages.success %></strong>
+        </div>
+        <%} %>
+    <%} %>
+<%} %>

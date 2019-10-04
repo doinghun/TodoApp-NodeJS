@@ -4,7 +4,7 @@
     <% include ./includes/head %>
 </head>
 <body class="container">
-
+    <% include ./includes/flash %>
 <header>
     <% include ./includes/header %>
 </header>
@@ -42,7 +42,11 @@
                     </form>
                 </td>
                 <td>
+                <% if(tasks.is_done === false){ %>
                     <%= tasks.title %>
+                <% } else { %>
+                    <strike><%= tasks.title %></strike>
+                <% } %>
                 </td>
                 <td>
                     <form action="/tasks/delete" method="POST">
@@ -72,10 +76,8 @@
             </tr>
                 <% } %>
             <% }) %>
-
         </table>
     </div>
-    
 </main>
 </body>
 </html>
