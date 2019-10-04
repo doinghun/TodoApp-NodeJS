@@ -149,7 +149,7 @@ app.get('/tasks/axios', (req,res) => {
 app.get('/api/tasks', db.getTasks)
 app.get('/api/tasks/:id', db.getTaskById)
 app.post('/api/tasks', db.createTask)
-app.put('/api/tasks/:id/:is_done', db.updateTask)
+app.put('/api/tasks/:id', db.updateTask)
 app.delete('/api/tasks/:id', db.deleteTask)
 
 const port = 3000

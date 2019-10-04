@@ -103,9 +103,11 @@ const deleteTask = (elem, id) => {
     
 };
 
+// update a task
 const updateTask = (elem, is_done, id) => {
-    console.log(is_done)
-    axios.put(`/api/tasks/${id}/${is_done}`)
+    axios.put(`/api/tasks/${id}`,{
+        is_done : is_done
+    })
         .then(res => {
             console.log(res.data);
             if(is_done == false){

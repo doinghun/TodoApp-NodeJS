@@ -52,7 +52,7 @@ const createTask = (req, res) => {
 
 const updateTask = (req,res) => {
     const id = parseInt(req.params.id);
-    if(req.params.is_done == "false"){
+    if(req.body.is_done == false){
         var is_done = true;
     } else {
         var is_done = false;
