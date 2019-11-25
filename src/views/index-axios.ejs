@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ./includes/head %>
 </head>
 
 <body class="container">
-    
-    <div class="form-group">
-        <h2>Create Tasks</h2>
-        <form class="form-inline justify-content-center" id="submit-task">
-            <input type="text" class="form-control" id="task" placeholder="Add New Tasks"></input>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <label><%= error %></label>
-        </form>
-    </div>
 
-    <div>
-        <h2>Tasks</h2>
-    </div>
+    <header>
+        <% include ./includes/header %>
+    </header>
 
-    <script src="/scripts/axios/dist/axios.min.js"></script>
-    <script src="/static/js/main.js"></script>
-    
-    <table class="table table-hover" id="task-table">
-        <tr>
-            <th style="width:10%"></th>
-            <th style="width:70%">Tasks</th>
-            <th style="width:20%"></th>
-        </tr>
-    </table>
-    
-   
+    <main>
+        <div class="todo">
+
+            <div class="form-group">
+                <form class="form-inline justify-content-center" id="submit-task">
+                    <input type="text" class="form-control" id="task" placeholder="Add New Tasks"></input>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <label><%= error %></label>
+                </form>
+            </div>
+
+            <div>
+                <h2>Tasks</h2>
+            </div>
+
+            <script src="/scripts/axios/dist/axios.min.js"></script>
+            <script src="/static/js/main.js"></script>
+
+            <table class="table table-hover" id="task-table">
+                <tr>
+                    <th style="width:10%"></th>
+                    <th style="width:70%">Tasks</th>
+                    <th style="width:20%"></th>
+                </tr>
+            </table>
+        </div>
+    </main>
 </body>
-</html>
 
+</html>
