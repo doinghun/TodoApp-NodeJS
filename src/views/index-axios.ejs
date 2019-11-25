@@ -10,7 +10,6 @@
     <header>
         <% include ./includes/header %>
     </header>
-
     <main>
         <div class="todo">
 
@@ -21,14 +20,20 @@
                     <label><%= error %></label>
                 </form>
             </div>
-
             <div>
-                <h2>Tasks</h2>
+                <p>
+                    <a class="btn btn-light" data-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Why use Axios?
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        Axios allows interaction between browser and API endpoint and thus, minimises number of
+                        redirects involved.
+                    </div>
+                </div>
             </div>
-
-            <script src="/scripts/axios/dist/axios.min.js"></script>
-            <script src="/static/js/main.js"></script>
-
             <table class="table table-hover" id="task-table">
                 <tr>
                     <th style="width:10%"></th>
@@ -39,5 +44,8 @@
         </div>
     </main>
 </body>
+
+<script src="/scripts/axios/dist/axios.min.js"></script>
+<script src="/static/js/main.js"></script>
 
 </html>

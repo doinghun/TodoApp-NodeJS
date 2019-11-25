@@ -121,7 +121,7 @@ app.post("/login", async (req, res) => {
 
   query(`SELECT id, email, password FROM users WHERE email = '${email}'`)
     .then(user => {
-      if (user.rows.length == 0) {
+      if (!user.rows.length) {
         req.flash("danger", "Oops. Incorrect login details.")
         res.redirect("/login")
       }
