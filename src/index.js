@@ -199,7 +199,7 @@ app.post("/api/tasks", db.createTask)
 app.put("/api/tasks/:id", db.updateTask)
 app.delete("/api/tasks/:id", db.deleteTask)
 
-const port = 3000
+const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`server started... localhost:${port}`)
 })
