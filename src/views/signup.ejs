@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ./includes/head %>
 </head>
+
 <body class="container">
     <% include ./includes/flash %>
-<header>
-    <% include ./includes/header %>
-</header>
-<main>
+    <header>
+        <% include ./includes/header %>
+    </header>
+    <main>
         <form class="login-form" action="/signup" method="POST">
             <div class="form-group">
                 <label for="email">E-Mail</label>
@@ -20,10 +22,16 @@
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password">
+                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"
+                    placeholder="Confirm Password">
             </div>
             <button class="btn btn-primary" type="submit">Signup</button>
         </form>
-</main>
+        <p align="center">
+            <img class="illustration" src="static/images/undraw_happy_feeling_slmw.svg" alt="happy" width="30%"
+                height="30%">
+        </p>
+    </main>
 </body>
+
 </html>
