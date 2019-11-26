@@ -10,7 +10,7 @@ npm install
 npm start
 ```
 
-* with database settings
+- with database settings
 
 ```bash
 DB_DATABASE=postgres DB_USER=marco DB_PASSWORD=postgres npm start
@@ -24,9 +24,9 @@ This todo list uses PostgreSQL as its primary DBMS. To start the project, set up
 
 Todo list uses the following schema:
 
-| PK | id serial |
-| - | - |
-|      | title VARCHAR <br> is_done BOOLEAN <br> created_at DATE <br> modified_at DATE |
+| PK  | id serial                                                                     |
+| --- | ----------------------------------------------------------------------------- |
+|     | title VARCHAR <br> is_done BOOLEAN <br> created_at DATE <br> modified_at DATE |
 
 ### Create table
 
@@ -38,7 +38,7 @@ CREATE TABLE tasks (
     title character varying (50) NOT NULL,
     is_done BOOLEAN NOT NULL DEFAULT false,
     created_at DATE NOT NULL DEFAULT CURRENT_DATE,
-    modified_at DATE
+    modified_at DATE,
     user_id UUID REFERENCES users(id)
 )
 ```

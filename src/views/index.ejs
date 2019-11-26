@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ./includes/head %>
 </head>
+
 <body class="container">
     <% include ./includes/flash %>
-<header>
-    <% include ./includes/header %>
-</header>
+    <header>
+        <% include ./includes/header %>
+    </header>
+    <style>
+        .welcome {
+            margin-bottom: 1em;
+        }
 
-<main>
-    <div class="jumbotron">
-        <p>To Do List App</p>
-        <a href='/tasks'><button class="btn btn-primary mb-2">I want to add todo items!</button></a>
-    </div>
-</main>
+        .illustration {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
+        }
+
+        .tech-stack {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
+        }
+
+        .vertical-center {
+            text-align: center;
+        }
+
+        p {
+            margin-top: 1em;
+        }
+    </style>
+    <main>
+        <img class="illustration" src="static/images/undraw_dev_productivity_umsq.svg" alt="Dev Productivity">
+
+        <div class=" jumbotron vertical-center">
+            <h2 class="welcome">Welcome to Dohun's Todo List App!</h2>
+
+            <a href='/tasks'><button class="btn btn-primary btn-lg ">Get Productive!</button></a>
+
+            <div class="container">
+                <p>
+                    <strong>Built with</strong>
+                </p>
+                <img class="tech-stack" src="static/images/tech-stack.png" alt="NodeJS PostgreSQL HTML CSS JavaScript">
+
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>

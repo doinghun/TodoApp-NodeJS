@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ./includes/head %>
 </head>
+
 <body class="container">
     <% include ./includes/flash %>
-<header>
-    <% include ./includes/header %>
-</header>
-<main>
+    <header>
+        <% include ./includes/header %>
+    </header>
+    <main>
         <form class="login-form" action="/login" method="POST">
             <div class="form-group">
                 <label for="email">E-Mail</label>
@@ -20,6 +22,11 @@
             </div>
             <button class="btn btn-primary" type="submit">Login</button>
         </form>
-</main>
+        <% if(!isAuthenticated) { %>
+        <p align="center"><img class="illustration" src="static/images/undraw_skateboard_nmbb.svg"
+                alt="Dev Productivity" width="40%" height="40%"></p>
+        <% }%>
+    </main>
 </body>
+
 </html>
