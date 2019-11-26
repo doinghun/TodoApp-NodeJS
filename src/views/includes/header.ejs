@@ -1,25 +1,27 @@
-<nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
-
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">
-				<h2>Todo List</h2>
-			</a>
-		</div>
-
-		<ul class="nav justify-content-end">
+<nav class="navbar navbar-expand-lg navbar-light" role="navigation">
+	<div class="navbar-header">
+		<a style="color: #007bff" class="navbar-brand" href="/">
+			<h2>Todo List</h2>
+		</a>
+	</div>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+		aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+		<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 			<% if(!isAuthenticated) { %>
-			<li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
-			<li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
+			<li class="nav-item active"><a class="nav-link" href="/login">Log In</a></li>
+			<li class="nav-item active"><a class="nav-link" href="/signup">Signup</a></li>
 			<% } else{%>
-			<li class="nav-item"><a class="nav-link" href="/tasks/axios">Try Axios vers.</a></li>
-			<li class="nav-item">
+			<li class="nav-item active"><a class="nav-link" href="/tasks/axios">Try Axios vers.</a></li>
+			<li class="nav-item active">
 				<form action="/logout" method="post">
-					<button class="btn btn-link" type="submit">Log Out</button>
+					<button class="btn btn-link" type="submit" style="color: grey">Log Out</button>
 				</form>
 			</li>
 			<% } %>
 		</ul>
-
+	</div>
 	</div>
 </nav>
