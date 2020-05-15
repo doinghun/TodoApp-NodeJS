@@ -13,12 +13,14 @@ npm start
 - with database settings
 
 ```bash
-DB_DATABASE=postgres DB_USER=marco DB_PASSWORD=postgres npm start
+DB_DATABASE=postgres DB_USER=postgres DB_PASSWORD=postgres npm start
 ```
 
 ## Setting up the database
 
-This todo list uses PostgreSQL as its primary DBMS. To start the project, set up the database as follows:
+This todo list uses PostgreSQL as its primary DBMS. <br>
+Use [pgAdmin4](https://www.codementor.io/@engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb#2-pgadmin-httpswwwpgadminorg) for PostgreSQL GUI. <br>
+To start the project, set up the database as follows:
 
 ### Recommended schema
 
@@ -28,10 +30,23 @@ Todo list uses the following schema:
 | --- | ----------------------------------------------------------------------------- |
 |     | title VARCHAR <br> is_done BOOLEAN <br> created_at DATE <br> modified_at DATE |
 
+### Create User Table
+
+For user log-in & sign-up management
+
+```sql
+CREATE TABLE IF NOT EXISTS users (
+        id UUID PRIMARY KEY,
+        email VARCHAR(128) UNIQUE NOT NULL,
+        password VARCHAR(128) NOT NULL
+      )
+```
+
 ### Create table
 
 Run the following query to create a tasks table:
 
+*(Create `users` Table first if you don't have it yet)*
 ```sql
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
@@ -58,18 +73,6 @@ To see the list of tasks you have inserted:
 
 ```sql
 SELECT * from tasks
-```
-
-### Create User Table
-
-For user log-in & sign-up management
-
-```sql
-CREATE TABLE IF NOT EXISTS users (
-        id UUID PRIMARY KEY,
-        email VARCHAR(128) UNIQUE NOT NULL,
-        password VARCHAR(128) NOT NULL
-      )
 ```
 
 ### Create Session table

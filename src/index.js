@@ -24,11 +24,11 @@ app.use(
   session({
     store: new pgSession({
       pool: pgPool,
-      tableName: "sessions"
+      tableName: "sessions",
     }),
     secret: "my secret",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
   })
 )
 
@@ -41,8 +41,8 @@ app.get("/", (req, res) => {
     messages: {
       danger: req.flash("danger"),
       warning: req.flash("warning"),
-      success: req.flash("success")
-    }
+      success: req.flash("success"),
+    },
   })
 })
 
@@ -65,8 +65,8 @@ app.get("/tasks", async (req, res) => {
     messages: {
       danger: req.flash("danger"),
       warning: req.flash("warning"),
-      success: req.flash("success")
-    }
+      success: req.flash("success"),
+    },
   })
 })
 
@@ -80,7 +80,7 @@ app.post("/tasks/add", (req, res) => {
       .then(() => {
         res.redirect("/tasks")
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err))
   }
 })
 
@@ -90,7 +90,7 @@ app.post("/tasks/delete", (req, res) => {
     .then(() => {
       res.redirect("/tasks")
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
 })
 
 app.post("/tasks/update", (req, res) => {
@@ -100,18 +100,17 @@ app.post("/tasks/update", (req, res) => {
     .then(() => {
       res.redirect("/tasks")
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
 })
 
 app.get("/login", (req, res) => {
-  console.log(req.session.isLoggedIn)
   res.render("login", {
     isAuthenticated: req.session.isLoggedIn,
     messages: {
       danger: req.flash("danger"),
       warning: req.flash("warning"),
-      success: req.flash("success")
-    }
+      success: req.flash("success"),
+    },
   })
 })
 
@@ -120,18 +119,18 @@ app.post("/login", async (req, res) => {
   const password = req.body.password
 
   query(`SELECT id, email, password FROM users WHERE email = '${email}'`)
-    .then(user => {
+    .then((user) => {
       if (!user.rows.length) {
         req.flash("danger", "Oops. Incorrect login details.")
         res.redirect("/login")
       }
       bcrypt
         .compare(password, user.rows[0].password)
-        .then(doMatch => {
+        .then((doMatch) => {
           if (doMatch) {
             req.session.isLoggedIn = true
             req.session.user = user
-            return req.session.save(err => {
+            return req.session.save((err) => {
               console.log(err)
               res.redirect("/tasks")
             })
@@ -139,16 +138,16 @@ app.post("/login", async (req, res) => {
           req.flash("danger", "Password is incorrect")
           res.redirect("/login")
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
           res.redirect("/login")
         })
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
 })
 
 app.post("/logout", (req, res) => {
-  req.session.destroy(err => {
+  req.session.destroy((err) => {
     console.log(err)
     res.redirect("/tasks")
   })
@@ -160,8 +159,8 @@ app.get("/signup", (req, res) => {
     messages: {
       danger: req.flash("danger"),
       warning: req.flash("warning"),
-      success: req.flash("success")
-    }
+      success: req.flash("success"),
+    },
   })
 })
 
@@ -176,7 +175,7 @@ app.post("/signup", (req, res) => {
     .then(() => {
       res.redirect("/login")
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
 })
 
 /*-----Using Axios on browser to interact with REST api endpoint-----*/
@@ -189,7 +188,7 @@ app.get("/tasks/axios", (req, res) => {
   const error = req.query.error || ""
   res.render("index-axios", {
     error,
-    isAuthenticated: req.session.isLoggedIn
+    isAuthenticated: req.session.isLoggedIn,
   })
 })
 
@@ -201,5 +200,5 @@ app.delete("/api/tasks/:id", db.deleteTask)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
-  console.log(`server started... localhost:${port}`)
+  console.log(`server started... http://localhost:${port}`)
 })
